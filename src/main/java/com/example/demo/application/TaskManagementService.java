@@ -50,7 +50,7 @@ public class TaskManagementService {
         return service.findById(id,token);
     }
 
-    public Task findByCustomer(final Integer id,final String token) {
+    public List<Task> findByCustomer(final Integer id,final String token) {
         customerService.existsById(id);
         Customer customer = customerService.findById(id,token);
         return service.findByCustomer(customer,token);

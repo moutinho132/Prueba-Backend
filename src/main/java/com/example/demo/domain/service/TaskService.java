@@ -39,9 +39,8 @@ public class TaskService {
                 .orElseThrow(() -> new TaskNotFoundException(id)));
     }
 
-    public Task findByCustomer(final Customer customer, final String token) {
-        return mapper.entityToModel(repository.findByCustomer(customerMapper.modelToEntity(customer))
-                .orElseThrow(() -> new CustomerNotFoundException(customer.getId())));
+    public List<Task> findByCustomer(final Customer customer, final String token) {
+        return mapper.entitiesToModelList(repository.findByCustomer(customerMapper.modelToEntity(customer)));
     }
 
     public void existsById(final Integer id) {

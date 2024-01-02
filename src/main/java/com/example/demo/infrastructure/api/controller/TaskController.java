@@ -47,7 +47,7 @@ public class TaskController implements TaskApi {
     }
 
     @Override
-    public TaskReponse findByCustomer(Integer id, String token) {
-        return mapper.modelToResponse(managementService.findByCustomer(id,token));
+    public List<TaskReponse> findByCustomer(Integer id, String token) {
+        return mapper.modelToResponseList(managementService.findByCustomer(id,token));
     }
 }

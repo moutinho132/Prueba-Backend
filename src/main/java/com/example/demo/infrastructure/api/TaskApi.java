@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 public interface TaskApi {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
@@ -36,5 +38,5 @@ public interface TaskApi {
     @GetMapping(path = "/customer/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    TaskReponse findByCustomer(@PathVariable("id") Integer id,@RequestHeader(value="Authorization") String token);
+    List<TaskReponse> findByCustomer(@PathVariable("id") Integer id, @RequestHeader(value="Authorization") String token);
 }

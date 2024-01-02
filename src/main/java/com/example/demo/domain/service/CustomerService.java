@@ -1,5 +1,6 @@
 package com.example.demo.domain.service;
 
+import com.example.demo.application.BusinessRuleException;
 import com.example.demo.application.CustomerNotFoundException;
 import com.example.demo.application.PersonFieldsBlockerService;
 import com.example.demo.domain.CustomerSpecification;
@@ -40,7 +41,7 @@ public class CustomerService {
 
     public void existsById(final Integer id) {
         if (!repository.existsById(id)) {
-            throw new CustomerNotFoundException(id);
+            throw new BusinessRuleException("Not found customer");
         }
     }
 
