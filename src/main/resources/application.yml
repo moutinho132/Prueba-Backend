@@ -2,12 +2,11 @@ app:
   security:
     jwt:
       secret: bp1E1VL6y4mMMfmJO9sgkqfZA7xbPgBLS415x5FEizE=
-      issuer: martza-tech
+      issuer: practica
       ttlMillis: 3600000
 spring:
   main:
     allow-circular-references: false
-
   jpa:
     database-platform: org.hibernate.dialect.MariaDBDialect
     open-in-view: false

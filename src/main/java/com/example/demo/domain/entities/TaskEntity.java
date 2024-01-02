@@ -1,5 +1,7 @@
 package com.example.demo.domain.entities;
 
+import com.example.demo.domain.TaskStatusEnum;
+import com.example.demo.domain.TaskStatusEnumConverter;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,9 +29,16 @@ public class TaskEntity implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "name")
+    private String name;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "customer_id")
     private CustomerEntity customer;
+
+    @Column(name = "status")
+    @Convert(converter = TaskStatusEnumConverter.class)
+    private TaskStatusEnum status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "creation_user_id")

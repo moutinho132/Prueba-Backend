@@ -1,5 +1,6 @@
 package com.example.demo.domain.models;
 
+import com.example.demo.domain.TaskStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -13,7 +14,13 @@ import java.time.LocalDateTime;
 public class Task {
     private Integer id;
     @With
+    private final String name;
+    @With
     private final String description;
+    @With
+    private final String task;
+    @With
+    private TaskStatusEnum status;
     @With
     private final Customer customer;
     @With

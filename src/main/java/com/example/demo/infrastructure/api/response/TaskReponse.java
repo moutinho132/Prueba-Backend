@@ -1,5 +1,6 @@
 package com.example.demo.infrastructure.api.response;
 
+import com.example.demo.domain.TaskStatusEnum;
 import com.example.demo.domain.models.Customer;
 import com.example.demo.domain.models.User;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -21,7 +22,9 @@ public class TaskReponse implements Serializable {
     private static final long serialVersionUID = 5994122034100114192L;
     private Integer id;
     private final String description;
+    private final String name;
     private final Customer customer;
+    private TaskStatusEnum status;
     private final User creationUser;
     private final User modificationUser;
     private final LocalDateTime creationTime;

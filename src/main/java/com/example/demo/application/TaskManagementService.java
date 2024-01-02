@@ -1,8 +1,8 @@
 package com.example.demo.application;
 
+import com.example.demo.domain.TaskStatusEnum;
 import com.example.demo.domain.models.Customer;
 import com.example.demo.domain.models.Task;
-import com.example.demo.domain.models.User;
 import com.example.demo.domain.service.CustomerService;
 import com.example.demo.domain.service.TaskService;
 import jakarta.transaction.Transactional;
@@ -49,11 +49,34 @@ public class TaskManagementService {
     public Task findById(final Integer id,final String token) {
         return service.findById(id,token);
     }
+    public void deleteById(final Integer id,final String token) {
+         service.deleteById(id,token);
+    }
 
     public List<Task> findByCustomer(final Integer id,final String token) {
         customerService.existsById(id);
         Customer customer = customerService.findById(id,token);
         return service.findByCustomer(customer,token);
+    }
+
+    @Transactional
+    public Task updateCompletedTask(final Integer id, final String token) {
+        Task taskUpdate = null ;
+        service.existsById(id);
+        final Task task = service.findById(id,token);
+
+       return service.save(Task
+               .builder()
+                       .id(task.getId())
+                       .modificationUser(securityManagementService.findCurrentUser(token))
+                       .modificationTime(LocalDateTime.now())
+                       .creationUser(task.getCreationUser())
+                       .creationTime(task.getCreationTime())
+                       .customer(task.getCustomer())
+                       .description(task.getDescription())
+                       .name(task.getName())
+                       .status(TaskStatusEnum.COMPLETED)
+               .build());
     }
 
     private void validateCustomer(Task model) {
@@ -65,6 +88,7 @@ public class TaskManagementService {
         built.set(buildCreationData(built.get(),token));
         built.set(buildModificationData(built.get(),token));
         built.set(buildCustomer(built.get(),token));
+        built.set(buildStatus(built.get()));
         return built.get();
     }
 
@@ -73,6 +97,13 @@ public class TaskManagementService {
             return model
                     .withCreationTime(LocalDateTime.now())
                     .withCreationUser(securityManagementService.findCurrentUser(token));
+        }
+        return model;
+    }
+
+    private Task buildStatus(final Task model) {
+        if (Objects.isNull(model.getStatus())) {
+            return model.withStatus(TaskStatusEnum.ACCEPTED);
         }
         return model;
     }

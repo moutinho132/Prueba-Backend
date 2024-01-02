@@ -14,7 +14,6 @@ public interface TaskApi {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-
     TaskReponse save(@RequestBody @Valid TaskRequest request, @RequestHeader(value = "Authorization") String token);
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -32,11 +31,22 @@ public interface TaskApi {
     @GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-
     TaskReponse findById(@PathVariable("id") Integer id,@RequestHeader(value="Authorization") String token);
 
     @GetMapping(path = "/customer/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     List<TaskReponse> findByCustomer(@PathVariable("id") Integer id, @RequestHeader(value="Authorization") String token);
+
+    @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    void deleteById(@PathVariable("id") Integer id,@RequestHeader(value="Authorization") String token);
+
+    @GetMapping(value = "/{id}/completed")
+    @ResponseBody
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    TaskReponse closeById(@PathVariable("id") Integer id,@RequestHeader(value="Authorization") String token);
+
 }

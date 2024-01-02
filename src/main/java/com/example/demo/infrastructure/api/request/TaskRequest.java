@@ -12,9 +12,6 @@ import java.time.LocalDateTime;
 public class TaskRequest {
     private Integer id;
     private String description;
+    private String name;
     private Customer customer;
-    private User creationUser;
-    private User modificationUser;
-    private LocalDateTime creationTime;
-    private LocalDateTime modificationTime;
 }

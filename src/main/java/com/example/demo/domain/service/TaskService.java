@@ -39,6 +39,12 @@ public class TaskService {
                 .orElseThrow(() -> new TaskNotFoundException(id)));
     }
 
+    public void deleteById(final Integer id, final String token) {
+        existsById(id);
+
+        repository.deleteById(id);
+    }
+
     public List<Task> findByCustomer(final Customer customer, final String token) {
         return mapper.entitiesToModelList(repository.findByCustomer(customerMapper.modelToEntity(customer)));
     }
