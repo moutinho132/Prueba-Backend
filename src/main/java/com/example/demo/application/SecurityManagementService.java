@@ -47,6 +47,8 @@ public class SecurityManagementService {
                     .name(user.getName())
                     .surname(user.getSurname())
                     .build();
+        }else{
+            throw new UnauthorizedException(null);
         }
         return newResponse;
     }
