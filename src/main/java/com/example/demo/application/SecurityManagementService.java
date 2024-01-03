@@ -48,7 +48,7 @@ public class SecurityManagementService {
                     .surname(user.getSurname())
                     .build();
         }else{
-            throw new UnauthorizedException(null);
+            throw new UnauthorizedException("User not valid");
         }
         return newResponse;
     }
